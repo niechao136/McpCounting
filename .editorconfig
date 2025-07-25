@@ -1,0 +1,78 @@
+﻿# .editorconfig for .NET + JetBrains Rider
+root = true
+
+[*]
+charset = utf-8
+indent_style = space
+indent_size = 4
+end_of_line = crlf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.cs]
+
+############### ✨ 命名风格 ###############
+
+# Interface 以 I 开头
+dotnet_naming_rule.interface_should_start_with_i.symbols = interfaces
+dotnet_naming_rule.interface_should_start_with_i.style = prefix_i
+dotnet_naming_rule.interface_should_start_with_i.severity = suggestion
+
+dotnet_naming_symbols.interfaces.applicable_kinds = interface
+dotnet_naming_symbols.interfaces.applicable_accessibilities = *
+
+dotnet_naming_style.prefix_i.required_prefix = I
+dotnet_naming_style.prefix_i.capitalization = pascal_case
+
+# 私有字段以下划线开头
+dotnet_naming_rule.private_fields_with_underscore.symbols = private_fields
+dotnet_naming_rule.private_fields_with_underscore.style = underscore_prefix
+dotnet_naming_rule.private_fields_with_underscore.severity = suggestion
+
+dotnet_naming_symbols.private_fields.applicable_kinds = field
+dotnet_naming_symbols.private_fields.applicable_accessibilities = private
+dotnet_naming_symbols.private_fields.required_modifiers = readonly
+
+dotnet_naming_style.underscore_prefix.required_prefix = _
+dotnet_naming_style.underscore_prefix.capitalization = camel_case
+
+############### ✨ var 使用风格 ###############
+
+# 在类型明显时使用 var
+csharp_style_var_when_type_is_apparent = true:suggestion
+# 对内建类型也使用 var
+csharp_style_var_for_built_in_types = true:suggestion
+# 对不明显的地方避免 var
+csharp_style_var_elsewhere = false:suggestion
+
+############### ✨ 表达式与模式匹配 ###############
+
+csharp_style_prefer_switch_expression = true:suggestion
+csharp_style_prefer_pattern_matching = true:suggestion
+csharp_style_conditional_delegate_call = true:suggestion
+csharp_style_throw_expression = true:suggestion
+
+############### ✨ 表达式体成员 ###############
+
+csharp_style_expression_bodied_methods = when_on_single_line:suggestion
+csharp_style_expression_bodied_constructors = false:suggestion
+csharp_style_expression_bodied_operators = false:suggestion
+csharp_style_expression_bodied_properties = when_on_single_line:suggestion
+
+############### ✨ 括号、缩进与空格风格 ###############
+
+csharp_new_line_before_open_brace = all
+csharp_indent_case_contents = true
+csharp_indent_switch_labels = true
+csharp_indent_labels = flush_left
+
+csharp_space_after_keywords_in_control_flow_statements = true
+csharp_space_between_method_declaration_parameter_list_parentheses = false
+csharp_space_between_method_call_parameter_list_parentheses = false
+csharp_space_after_cast = true
+
+############### ✨ using 指令风格 ###############
+
+dotnet_sort_system_directives_first = true
+dotnet_separate_import_directive_groups = true
+

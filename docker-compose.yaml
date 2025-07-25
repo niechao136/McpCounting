@@ -1,0 +1,7 @@
+﻿services:
+  mcp_counting:
+    image: mcp_counting
+    build:
+      context: .
+      dockerfile: McpCounting/Dockerfile
+
