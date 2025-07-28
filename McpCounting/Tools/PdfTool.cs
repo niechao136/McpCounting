@@ -8,7 +8,9 @@ namespace McpCounting.Tools;
 public class PdfTool(IWebHostEnvironment env, IHttpContextAccessor httpContext)
 {
     [McpServerTool, Description("根据 URL 将页面转换为 PDF 文件，最后返回文件链接。")]
-    public async Task<string> UrlToPdf([Description("需要转换为 PDF 的 URL")] string url)
+    public async Task<string> UrlToPdf(
+        [Description("需要转换为 PDF 的 URL")] string url
+        )
     {
         using IPlaywright playwright = await Playwright.CreateAsync();
 
