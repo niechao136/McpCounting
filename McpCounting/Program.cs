@@ -21,7 +21,10 @@ builder.Services.AddHttpClient("CustomClient", client =>
 });
 
 builder.Services.AddMcpServer()
-    .WithHttpTransport()
+    .WithHttpTransport(opt =>
+    {
+        opt.Stateless = true;
+    })
     .WithToolsFromAssembly()
     .WithResourcesFromAssembly();
 
