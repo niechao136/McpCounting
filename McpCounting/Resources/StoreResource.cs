@@ -6,37 +6,37 @@ namespace McpCounting.Resources;
 
 public class Device
 {
-    public string id { get; set; }
-    public string name { get; set; }
-    public string type { get; set; }
+    public string? id { get; set; }
+    public string? name { get; set; }
+    public string? type { get; set; }
 }
 
 public class Sensor
 {
-    public string console_name { get; set; }
-    public string device_id { get; set; }
-    public string device_type { get; set; }
-    public string sensor_id { get; set; }
-    public string sensor_name { get; set; }
-    public string sensor_type { get; set; }
+    // public string? console_name { get; set; }
+    // public string? device_id { get; set; }
+    public string? device_type { get; set; }
+    public string? sensor_id { get; set; }
+    // public string? sensor_name { get; set; }
+    // public string? sensor_type { get; set; }
 }
 
 public class Store
 {
-    public string address { get; set; }
-    public string city { get; set; }
-    public string country { get; set; }
-    public List<Device> devices { get; set; }
-    public string province { get; set; }
-    public string register_key { get; set; }
-    public List<Sensor> sensors { get; set; }
-    public string store_id { get; set; }
-    public string store_name { get; set; }
+    public string? address { get; set; }
+    public string? city { get; set; }
+    public string? country { get; set; }
+    // public List<Device>? devices { get; set; }
+    public string? province { get; set; }
+    public string? register_key { get; set; }
+    public List<Sensor>? sensors { get; set; }
+    public string? store_id { get; set; }
+    public string? store_name { get; set; }
 }
 
 public class StoreList
 {
-    public List<Store> stores { get; set; }
+    public List<Store>? stores { get; set; }
 }
 
 [McpServerResourceType]
