@@ -13,13 +13,6 @@ ARG BUILD_CONFIGURATION=Release
 # 设置工作目录
 WORKDIR /src
 
-# 设置 PATH 正确方式（Docker 中 ENV 不会解析 ${PATH}）
-ENV DOTNET_CLI_HOME=/tmp
-ENV PATH=/root/.dotnet/tools:$PATH
-
-# 安装 Playwright CLI 工具
-RUN dotnet tool install --global Microsoft.Playwright.CLI
-
 # 复制项目文件并还原依赖
 COPY ["McpCounting/McpCounting.csproj", "McpCounting/"]
 RUN dotnet restore "McpCounting/McpCounting.csproj"
@@ -32,6 +25,13 @@ WORKDIR /src/McpCounting
 
 # 编译项目（可选，但建议先 build 再 publish）
 RUN dotnet build "McpCounting.csproj" -c $BUILD_CONFIGURATION --no-restore
+
+# 设置 PATH 正确方式（Docker 中 ENV 不会解析 ${PATH}）
+ENV DOTNET_CLI_HOME=/tmp
+ENV PATH=/root/.dotnet/tools:$PATH
+
+# 安装 Playwright CLI 工具
+RUN dotnet tool install --global Microsoft.Playwright.CLI
 
 # 安装 Playwright 浏览器依赖（必须在 build 后执行）
 RUN /root/.dotnet/tools/playwright install --with-deps
