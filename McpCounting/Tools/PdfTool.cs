@@ -43,11 +43,13 @@ public class PdfTool(IWebHostEnvironment env, IHttpContextAccessor httpContext)
         var filePath = Path.Combine(pdfDir, fileName);
 
         // 输出 PDF
+        await page.EmulateMediaAsync(new PageEmulateMediaOptions { Media = Media.Screen });
         await page.PdfAsync(new PagePdfOptions
         {
             Path = filePath,
-            Format = "A4",
-            PrintBackground = true
+            Format = "A4", // 启用分页打印
+            PrintBackground = true,
+            Scale = 0.542f
         });
 
         // 构造访问 URL

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Net;
 using System.Net.Http.Headers;
 
 using McpCounting.Resources;
@@ -44,6 +45,7 @@ public class WeeklyTool(IHttpClientFactory httpClientFactory)
         var id = store.store_id ?? "";
         var rk = store.register_key ?? "";
 
-        return $"{app.TrimEnd('/')}/pdf?accId={accId}&accName={accName}&name={name}&id={id}&rk={rk}&date={date}&lang={lang}";
+        var path = $"{app.TrimEnd('/')}/pdf?accId={accId}&accName={accName}&name={name}&id={id}&rk={rk}&date={date}&lang={lang}";
+        return WebUtility.UrlEncode(path);
     }
 }
