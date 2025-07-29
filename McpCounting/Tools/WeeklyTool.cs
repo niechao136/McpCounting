@@ -10,6 +10,7 @@ using Newtonsoft.Json.Linq;
 
 namespace McpCounting.Tools;
 
+[McpServerToolType]
 public class WeeklyTool(IHttpClientFactory httpClientFactory)
 {
 
