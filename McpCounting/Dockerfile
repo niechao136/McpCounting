@@ -34,7 +34,7 @@ WORKDIR /src/McpCounting
 RUN dotnet build "McpCounting.csproj" -c $BUILD_CONFIGURATION --no-restore
 
 # 安装 Playwright 浏览器依赖（必须在 build 后执行）
-RUN dotnet playwright install --with-deps
+RUN playwright install --with-deps
 
 # 发布项目到发布目录（不使用 AppHost 以简化容器）
 RUN dotnet publish "McpCounting.csproj" \
