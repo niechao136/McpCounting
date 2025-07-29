@@ -44,6 +44,6 @@ public class WeeklyTool(IHttpClientFactory httpClientFactory)
         var id = store.store_id ?? "";
         var rk = store.register_key ?? "";
 
-        return $"{app.TrimEnd('/')}/pdf?accId=${accId}&accName=${accName}&name=${name}&id=${id}&rk=${rk}&date=${date}&lang=${lang}";
+        return $"{app.TrimEnd('/')}/pdf?accId={accId}&accName={accName}&name={name}&id={id}&rk={rk}&date={date}&lang={lang}";
     }
 }
