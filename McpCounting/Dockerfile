@@ -1,5 +1,5 @@
 ﻿# ---------- 基础运行镜像 ----------
-FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS base
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 USER root
 WORKDIR /app
 EXPOSE 8080
@@ -7,7 +7,7 @@ EXPOSE 8081
 
 
 # ---------- 构建阶段：使用 Playwright 官方带依赖的镜像 ----------
-FROM mcr.microsoft.com/playwright/dotnet:v1.44.0-jammy AS build
+FROM mcr.microsoft.com/playwright/dotnet:v1.50.0-noble AS build
 ARG BUILD_CONFIGURATION=Release
 
 # 设置工作目录
