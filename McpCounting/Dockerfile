@@ -10,11 +10,12 @@ FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 
+# 设置环境变量以安装全局工具（避免权限问题）
+ENV DOTNET_CLI_HOME=/tmp \
+    PATH="${PATH}:/root/.dotnet/tools"
+
 # 安装 Playwright CLI（.NET 版）
 RUN dotnet tool install --global Microsoft.Playwright.CLI
-
-# 添加 .NET 工具路径到 PATH
-ENV PATH="${PATH}:/root/.dotnet/tools"
 
 # 复制项目文件并还原依赖
 COPY ["McpCounting/McpCounting.csproj", "McpCounting/"]
