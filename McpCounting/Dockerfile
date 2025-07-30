@@ -27,8 +27,7 @@ WORKDIR /src/McpCounting
 RUN dotnet build "McpCounting.csproj" -c $BUILD_CONFIGURATION --no-restore
 
 # 设置 PATH 正确方式（Docker 中 ENV 不会解析 ${PATH}）
-ENV DOTNET_CLI_HOME=/tmp
-ENV PATH=/tmp/.dotnet/tools:$PATH
+ENV PATH=/root/.dotnet/tools:$PATH
 
 # 安装 Playwright 浏览器（不再需要 --with-deps）
 RUN dotnet tool install --global Microsoft.Playwright.CLI && \
@@ -49,10 +48,10 @@ WORKDIR /app
 COPY --from=build /app/publish .
 
 # 拷贝 Playwright 浏览器缓存（可选，但更推荐设置共享路径）
-COPY --from=build /home/pwuser/.cache/ms-playwright /home/pwuser/.cache/ms-playwright
+COPY --from=build /root/.cache/ms-playwright /root/.cache/ms-playwright
 
 # 设置浏览器缓存路径（告诉 Playwright 不重新下载）
-ENV PLAYWRIGHT_BROWSERS_PATH=/home/pwuser/.cache/ms-playwright
+ENV PLAYWRIGHT_BROWSERS_PATH=/root/.cache/ms-playwright
 
 # 启动服务
 ENTRYPOINT ["dotnet", "McpCounting.dll"]
