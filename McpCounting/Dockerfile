@@ -6,28 +6,6 @@ EXPOSE 8080
 EXPOSE 8081
 
 
-# 安装 Playwright 所需依赖
-RUN apt-get update && apt-get install -y \
-    libglib2.0-0 \
-    libnss3 \
-    libatk1.0-0 \
-    libatk-bridge2.0-0 \
-    libcups2 \
-    libxcomposite1 \
-    libxdamage1 \
-    libxrandr2 \
-    libgbm1 \
-    libasound2 \
-    libpangocairo-1.0-0 \
-    libgtk-3-0 \
-    libx11-xcb1 \
-    libxshmfence1 \
-    libxss1 \
-    libxtst6 \
-    fonts-noto-color-emoji \
-    && rm -rf /var/lib/apt/lists/*
-
-
 # ---------- 构建阶段：使用 Playwright 官方带依赖的镜像 ----------
 FROM mcr.microsoft.com/playwright/dotnet:v1.50.0-noble AS build
 ARG BUILD_CONFIGURATION=Release
@@ -63,7 +41,7 @@ RUN dotnet publish "McpCounting.csproj" \
 
 
 # ---------- 最终运行阶段 ----------
-FROM base AS final
+FROM mcr.microsoft.com/playwright/dotnet:v1.50.0-noble AS final
 WORKDIR /app
 
 # 拷贝发布后的应用
