@@ -48,10 +48,10 @@ WORKDIR /app
 COPY --from=build /app/publish .
 
 # 拷贝 Playwright 浏览器缓存（可选，但更推荐设置共享路径）
-COPY --from=build /root/.cache/ms-playwright /root/.cache/ms-playwright
+COPY --from=build /ms-playwright /ms-playwright
 
 # 设置浏览器缓存路径（告诉 Playwright 不重新下载）
-ENV PLAYWRIGHT_BROWSERS_PATH=/root/.cache/ms-playwright
+ENV PLAYWRIGHT_BROWSERS_PATH=/ms-playwright
 
 # 启动服务
 ENTRYPOINT ["dotnet", "McpCounting.dll"]
