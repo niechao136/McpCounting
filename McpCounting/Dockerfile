@@ -29,6 +29,7 @@ RUN dotnet build "McpCounting.csproj" -c $BUILD_CONFIGURATION --no-restore
 # 设置 PATH 正确方式（Docker 中 ENV 不会解析 ${PATH}）
 ENV DOTNET_CLI_HOME=/tmp
 ENV PATH=/tmp/.dotnet/tools:$PATH
+USER root
 
 # 安装 Playwright 浏览器（不再需要 --with-deps）
 RUN dotnet tool install --global Microsoft.Playwright.CLI && \
