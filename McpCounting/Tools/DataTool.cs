@@ -1,8 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Net.Http.Headers;
 
-using McpCounting.Resources;
-
 using ModelContextProtocol.Server;
 
 using Newtonsoft.Json;
@@ -19,15 +17,15 @@ public class DataTool(IHttpClientFactory httpClientFactory)
     public async Task<string> GetWidget(
         [Description("api 地址")] string api,
         [Description("token，格式为 {\"token_id\":\"xxx\",\"token\":\"yyy\"} 的 JSON 字符串")] string token,
-        [Description("需要获取客流数据的门店信息")] List<Store> stores,
+        [Description("需要获取客流数据的门店 ID 列表")] List<string> storeIds,
         [Description("客流数据的时间范围，包括开始日期和结束日期，格式为YYYY/MM/DD")] List<string> date,
         [Description("客流数据的时间单位，包括小时-hh，日-dd，周-ww，月-mm，年-yyyy")] string unit
     )
     {
         var url = $"{api.TrimEnd('/')}/api/widget/data";
-        JObject[] sources = stores.Select(store => new JObject
+        JObject[] sources = storeIds.Select(id => new JObject
         {
-            new JProperty("target_id", store.store_id)
+            new JProperty("target_id", id)
         }).ToArray();
         var data = new JObject
         {
@@ -109,14 +107,12 @@ public class DataTool(IHttpClientFactory httpClientFactory)
             rate.Add(id, value);
         }
 
-        JObject[] storeData = stores.Select(store => new JObject
+        JObject[] storeData = storeIds.Select(id => new JObject
         {
-            new JProperty("store_id", store.store_id),
-            new JProperty("store_name", store.store_name),
-            new JProperty("register_key", store.register_key),
-            new JProperty("traffic", JArray.FromObject(pin[store.store_id ?? ""])),
-            new JProperty("outside", JArray.FromObject(cross[store.store_id ?? ""])),
-            new JProperty("turn_in_rate", JArray.FromObject(rate[store.store_id ?? ""])),
+            new JProperty("store_id", id),
+            new JProperty("traffic", JArray.FromObject(pin[id])),
+            new JProperty("outside", JArray.FromObject(cross[id])),
+            new JProperty("turn_in_rate", JArray.FromObject(rate[id])),
         }).ToArray();
 
         var result = new JObject
