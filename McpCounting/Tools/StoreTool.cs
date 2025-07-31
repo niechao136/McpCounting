@@ -19,7 +19,7 @@ public class StoreTool(IHttpClientFactory httpClientFactory)
     [McpServerTool, Description("根据 api 地址、token 和用户 ID 获取门店（地点）列表信息")]
     public async Task<string> GetStore(
         [Description("api 地址")] string api,
-        [Description("token")] string token,
+        [Description("token，格式为 {\"token_id\":\"xxx\",\"token\":\"yyy\"} 的 JSON 字符串")] string token,
         [Description("用户 ID")] string userId
         )
     {

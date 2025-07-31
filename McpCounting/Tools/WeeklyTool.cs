@@ -21,7 +21,7 @@ public class WeeklyTool(IHttpClientFactory httpClientFactory)
     public async Task<string> GetPdfUrl(
         [Description("app 地址")] string app,
         [Description("api 地址")] string api,
-        [Description("token")] string token,
+        [Description("token，格式为 {\"token_id\":\"xxx\",\"token\":\"yyy\"} 的 JSON 字符串")] string token,
         [Description("周报对应门店的信息")] Store store,
         [Description("周报日期范围的周一日期，格式：YYYY-MM-DD")] string date,
         [Description("根据问题语言自动确定的周报语言，共有 zh-CN、zh-TW、en-US 这三种，非中文时统一为 en-US")] string lang
