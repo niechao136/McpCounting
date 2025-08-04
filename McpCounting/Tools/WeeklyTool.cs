@@ -46,6 +46,6 @@ public class WeeklyTool(IHttpClientFactory httpClientFactory)
         var rk = store.register_key ?? "";
 
         var path = $"{app.TrimEnd('/')}/pdf?accId={accId}&accName={accName}&name={name}&id={id}&rk={rk}&date={date}&lang={lang}";
-        return WebUtility.UrlEncode(path);
+        return path;
     }
 }
